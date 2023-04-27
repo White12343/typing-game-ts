@@ -145,14 +145,14 @@ class Boss extends Role {
 class Controller {
     constructor() {
         this.WIN_SCORE = 100;
-        this.user = null;
+        this.user = new User('default');
         this.bosses = [
             new Boss("黑暗魔王", 50, 20, 8),
             new Boss("毒蛇魔王", 70, 20, 8),
             new Boss("魔龍王", 90, 20, 8),
             new Boss("鬼面魔王", 110, 40, 12),
-            new Boss("火焰魔王", 130, 40, 12),
-            new Boss("火焰魔王", 150, 40, 12),
+            new Boss("火魔王", 130, 40, 12),
+            new Boss("焰魔王", 150, 40, 12),
             new Boss("雷電魔王", 170, 40, 15),
             new Boss("地獄魔王", 190, 50, 15),
             new Boss("獨角魔王", 210, 50, 15),
@@ -167,7 +167,9 @@ class Controller {
     startGame() {
         console.log("遊戲開始!");
         this.rl.question("請輸入玩家姓名: ", (name) => {
-            this.user = new User(name);
+            if (name !== '') {
+                this.user = new User(name);
+            }
             ConsoleColors.logYellow(`[系統]: 玩家 ${this.user.getName()} 血量為 ${this.user.getHealth()}`);
             this.playLevel();
         });
